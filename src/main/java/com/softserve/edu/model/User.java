@@ -1,34 +1,41 @@
 package com.softserve.edu.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.Email;
+import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "users")
+@Entity(name = "users")
 public class User {
+
+    public enum Role{
+        MENTOR, TRAINEE
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Email
-    private String email;
-
-    @Column(nullable = false)
+    @NotNull
+    @Size(min = 2, max = 20, message = "First name must be between 2 and 20 characters")
     private String firstName;
 
-    @Column(nullable = false)
+    @NotNull
+    @Size(min = 2, max = 20, message = "Last name must be between 2 and 20 characters")
     private String lastName;
 
-    @Column(nullable = false)
+    @Column(unique = true)
+    @NotNull
+    @Pattern(regexp = ".+@.+\\..+", message = "Please provide a valid email address!")
+    private String email;
+
+    @NotNull
     private String password;
 
-    @Column(nullable = false)
+    @NotNull
+    @Enumerated(EnumType.STRING)
     private String role;
+
 }

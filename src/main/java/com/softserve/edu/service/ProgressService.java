@@ -2,7 +2,6 @@ package com.softserve.edu.service;
 
 import com.softserve.edu.model.Progress;
 import com.softserve.edu.model.Task;
-import com.softserve.edu.model.TaskStatus;
 import com.softserve.edu.model.User;
 
 
@@ -16,7 +15,7 @@ public interface ProgressService {
 
     Progress addOrUpdateProgress(Progress p);
 
-    boolean setStatus(TaskStatus status, Progress p);
+    //boolean setStatus(TaskStatus status, Progress p);
 
     List<Progress> allProgressByUserIdAndMarathonId(Long userId, Long marathonId);
 

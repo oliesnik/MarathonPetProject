@@ -1,21 +1,20 @@
 package com.softserve.edu.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "tasks")
+@Entity(name = "tasks")
 public class Task {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Temporal(TemporalType.DATE)
     private LocalDate created;
@@ -23,6 +22,7 @@ public class Task {
     @Temporal(TemporalType.DATE)
     private LocalDate updated;
 
-    @Column(nullable = false)
+    @NotNull
     private String title;
+
 }
