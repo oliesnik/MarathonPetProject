@@ -16,10 +16,10 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.DATE)
+    @Column(columnDefinition = "DATE")
     private LocalDate created;
 
-    @Temporal(TemporalType.DATE)
+    @Column(columnDefinition = "DATE")
     private LocalDate updated;
 
     @NotNull

@@ -15,10 +15,10 @@ public class Sprint {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.DATE)
+    @Column(columnDefinition = "DATE")
     private LocalDate finish;
 
-    @Temporal(TemporalType.DATE)
+    @Column(columnDefinition = "DATE")
     private LocalDate start;
 
     @NotNull

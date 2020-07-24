@@ -7,6 +7,7 @@ import javax.validation.constraints.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @Entity(name = "users")
 public class User {
 
@@ -36,6 +37,6 @@ public class User {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    private String role;
+    private Role role;
 
 }

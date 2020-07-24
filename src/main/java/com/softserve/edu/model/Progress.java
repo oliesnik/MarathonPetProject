@@ -22,10 +22,10 @@ public class Progress {
     @ManyToOne
     private Task task;
 
-    @Temporal(TemporalType.DATE)
+    @Column(columnDefinition = "DATE")
     private LocalDate started;
 
-    @Temporal(TemporalType.DATE)
+    @Column(columnDefinition = "DATE")
     private LocalDate updated;
 
     @NotNull
