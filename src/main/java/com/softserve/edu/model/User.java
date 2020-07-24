@@ -7,7 +7,6 @@ import javax.validation.constraints.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Entity(name = "users")
 public class User {
 

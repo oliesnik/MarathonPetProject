@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -27,8 +28,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         List<User> users = userRepository.findAll();
-
-        if (!users.isEmpty()){
+        if (!users.isEmpty()) {
             return users;
         }
         return new ArrayList<>();
@@ -36,23 +36,39 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long id) {
-        return null;
+        Optional<User> user = userRepository.findById(id);
+        return user.orElse(null);
     }
 
     @Override
     public User createOrUpdateUser(User entity) {
-      //  if (entity.getId() != null)
+        if (entity.getId() != null) {
 
-        return null;
+            Optional<User> user = userRepository.findById(entity.getId());
+            if (user.isPresent()) {
+                User newUser = user.get();
+                newUser.setEmail(entity.getEmail());
+                newUser.setFirstName(entity.getFirstName());
+                newUser.setLastName(entity.getLastName());
+                newUser.setRole(entity.getRole());
+                newUser.setPassword(entity.getPassword());
+                newUser = userRepository.save(newUser);
+                return newUser;
+            }
+        }
+        entity = userRepository.save(entity);
+        return entity;
     }
 
     @Override
     public List<User> getAllByRole(String role) {
-        return null;
+        return userRepository.getAllByRole(User.Role.valueOf(role.toUpperCase()));
     }
 
     @Override
     public boolean addUserToMarathon(User user, Marathon marathon) {
+        User userEntity = userRepository.getOne(user.getId());
+
         return false;
     }
 
