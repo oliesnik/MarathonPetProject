@@ -18,5 +18,4 @@ public interface UserService {
 
     boolean addUserToMarathon(User user, Marathon marathon);
 
-    boolean addUserToTask(User user, Task task);
 }

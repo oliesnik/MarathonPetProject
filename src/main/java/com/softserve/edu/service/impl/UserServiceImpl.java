@@ -8,6 +8,7 @@ import com.softserve.edu.repository.UserRepository;
 import com.softserve.edu.service.UserService;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        return user.orElse(null);
+        if(user.isPresent()){
+            return user.get();
+        } else {
+            throw new EntityNotFoundException("No user with such id!");
+        }
     }
 
     @Override
@@ -72,8 +77,4 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-    @Override
-    public boolean addUserToTask(User user, Task task) {
-        return false;
-    }
 }
