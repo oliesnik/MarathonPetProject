@@ -1,26 +1,25 @@
 package com.softserve.edu.model;
 
 import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name="progress")
 public class Progress {
 
-    public enum TaskStatus{
+    public enum TaskStatus {
         PASS, FAIL, PENDING
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    private Task task;
 
     @Column(columnDefinition = "DATE")
     private LocalDate started;
@@ -31,7 +30,10 @@ public class Progress {
     @NotNull
     private String status;
 
+    @OneToMany(mappedBy = "progress", cascade = CascadeType.ALL)
+    private List<User> trainees;
 
-
+    @OneToMany(mappedBy = "progress", cascade = CascadeType.ALL)
+    private List<Task> tasks;
 
 }

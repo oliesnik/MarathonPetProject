@@ -1,6 +1,7 @@
 package com.softserve.edu.model;
 
 import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "tasks")
+@Entity(name="task")
 public class Task {
 
     @Id
@@ -25,4 +26,11 @@ public class Task {
     @NotNull
     private String title;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "sprint_id", referencedColumnName = "id")
+    private Sprint sprint;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "progress_id", referencedColumnName = "id")
+    private Progress progress;
 }
