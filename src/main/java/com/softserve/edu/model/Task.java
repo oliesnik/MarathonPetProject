@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Data
@@ -30,7 +31,6 @@ public class Task {
     @JoinColumn(name = "sprint_id", referencedColumnName = "id")
     private Sprint sprint;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "progress_id", referencedColumnName = "id")
-    private Progress progress;
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    private List<Progress> progress;
 }

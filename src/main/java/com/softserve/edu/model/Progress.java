@@ -30,10 +30,12 @@ public class Progress {
     @NotNull
     private String status;
 
-    @OneToMany(mappedBy = "progress", cascade = CascadeType.ALL)
-    private List<User> trainees;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "progress_id", referencedColumnName = "id")
+    private Task task;
 
-    @OneToMany(mappedBy = "progress", cascade = CascadeType.ALL)
-    private List<Task> tasks;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "trainee_id", referencedColumnName = "id")
+    private User trainee;
 
 }
