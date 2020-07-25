@@ -41,10 +41,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "trainee_id", referencedColumnName = "id")
-    private Progress progress;
+    @OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
+    private List<Progress> progress;
 
+    @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Marathon> marathon;
 }
