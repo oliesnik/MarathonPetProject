@@ -6,9 +6,13 @@ import com.softserve.edu.model.User;
 import com.softserve.edu.repository.TaskRepository;
 import com.softserve.edu.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
+@Service
+@Transactional
 public class TaskServiceImpl implements TaskService {
 
     final private TaskRepository taskRepository;

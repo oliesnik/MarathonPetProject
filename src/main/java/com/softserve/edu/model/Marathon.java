@@ -2,7 +2,6 @@ package com.softserve.edu.model;
 
 import lombok.*;
 import javax.persistence.*;
-import javax.swing.*;
 import javax.validation.constraints.*;
 import java.util.List;
 

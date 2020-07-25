@@ -28,7 +28,8 @@ public class Progress {
     private LocalDate updated;
 
     @NotNull
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "progress_id", referencedColumnName = "id")

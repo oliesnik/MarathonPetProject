@@ -1,7 +1,6 @@
 package com.softserve.edu.service.impl;
 
 import com.softserve.edu.model.Marathon;
-import com.softserve.edu.model.Task;
 import com.softserve.edu.model.User;
 import com.softserve.edu.repository.MarathonRepository;
 import com.softserve.edu.repository.UserRepository;
@@ -48,7 +47,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createOrUpdateUser(User entity) {
         if (entity.getId() != null) {
-
             Optional<User> user = userRepository.findById(entity.getId());
             if (user.isPresent()) {
                 User newUser = user.get();
@@ -73,8 +71,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean addUserToMarathon(User user, Marathon marathon) {
         User userEntity = userRepository.getOne(user.getId());
-
-        return false;
+        Marathon marathonEntity = marathonRepository.getOne(marathon.getId());
+        marathonEntity.getUser().add(userEntity);
+        return true;
     }
 
 }
