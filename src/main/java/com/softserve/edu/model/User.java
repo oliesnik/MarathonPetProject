@@ -1,16 +1,19 @@
 package com.softserve.edu.model;
 
 import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "users")
+@Entity(name="user")
 public class User {
 
-    public enum Role{
+    public enum Role {
         MENTOR, TRAINEE
     }
 
@@ -38,4 +41,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "trainee_id", referencedColumnName = "id")
+    private Progress progress;
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private List<Marathon> marathon;
 }
