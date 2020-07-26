@@ -9,9 +9,13 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -46,6 +50,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createOrUpdateUser(User entity) {
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<User>> violations = validator.validate(entity);
+        if(!violations.isEmpty()){
+            throw new RuntimeException(violations.toString());
+        }
         if (entity.getId() != null) {
             Optional<User> user = userRepository.findById(entity.getId());
             if (user.isPresent()) {
