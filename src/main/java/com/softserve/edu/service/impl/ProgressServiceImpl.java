@@ -1,9 +1,13 @@
 package com.softserve.edu.service.impl;
 
+import com.softserve.edu.exception.EntityNotFoundException;
 import com.softserve.edu.model.Progress;
 import com.softserve.edu.model.Task;
 import com.softserve.edu.model.User;
 import com.softserve.edu.repository.ProgressRepository;
+import com.softserve.edu.repository.SprintRepository;
+import com.softserve.edu.repository.TaskRepository;
+import com.softserve.edu.repository.UserRepository;
 import com.softserve.edu.service.ProgressService;
 import org.springframework.stereotype.Service;
 
@@ -15,21 +19,29 @@ import java.util.Optional;
 @Transactional
 public class ProgressServiceImpl implements ProgressService {
 
-    final private ProgressRepository progressRepository;
+    final ProgressRepository progressRepository;
+    final UserRepository userRepository;
+    final SprintRepository sprintRepository;
+    final TaskRepository taskRepository;
 
-    public ProgressServiceImpl(ProgressRepository progressRepository) {
+    public ProgressServiceImpl(ProgressRepository progressRepository, UserRepository userRepository, SprintRepository sprintRepository, TaskRepository taskRepository) {
         this.progressRepository = progressRepository;
+        this.userRepository = userRepository;
+        this.sprintRepository = sprintRepository;
+        this.taskRepository = taskRepository;
     }
 
     @Override
     public Progress getProgressById(Long id) {
-        Optional<Progress> sprint = progressRepository.findById(id);
-        return sprint.orElse(null);
+        return progressRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No Progress exist for given id")));
     }
 
     @Override
     public Progress addTaskForStudent(Task task, User user) {
-        return null;
+        Progress progress  = new Progress();
+        progress.setTrainee(userRepository.getOne(user.getId()));
+        progress.setTask(taskRepository.getOne(task.getId()));
+        return progressRepository.save(progress);
     }
 
     @Override
@@ -50,12 +62,25 @@ public class ProgressServiceImpl implements ProgressService {
     }
 
     @Override
+    public boolean setStatus(Progress.TaskStatus status, Progress p) {
+        Optional<Progress> progressEntityOpt = progressRepository.findById(p.getId());
+        if (progressEntityOpt.isPresent()) {
+            Progress progressEntity = progressEntityOpt.get();
+            if (progressEntity.getStatus() != status) {
+                progressEntity.setStatus(status);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public List<Progress> allProgressByUserIdAndMarathonId(Long userId, Long marathonId) {
-        return null;
+        return progressRepository.allProgressByUserIdAndMarathonId(userId, marathonId);
     }
 
     @Override
     public List<Progress> allProgressByUserIdAndSprintId(Long userId, Long sprintId) {
-        return null;
+        return progressRepository.allProgressByUserIdAndSprintId(userId, sprintId);
     }
 }

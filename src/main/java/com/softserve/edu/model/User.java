@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="user")
+@Entity(name="users")
 public class User {
 
     public enum Role {
@@ -41,10 +41,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "trainee", cascade = CascadeType.ALL)
-    private List<Progress> progress;
+    @OneToMany(mappedBy = "trainee")
+    private List<Progress> progresses;
 
     @ToString.Exclude
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    private List<Marathon> marathon;
+    @ManyToMany(mappedBy = "users")
+    private List<Marathon> marathons;
 }

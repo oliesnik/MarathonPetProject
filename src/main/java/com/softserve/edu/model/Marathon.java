@@ -3,12 +3,14 @@ package com.softserve.edu.model;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="marathon")
+@ToString(exclude = {"sprints", "users"})
+@Entity
 public class Marathon {
 
     @Id
@@ -18,12 +20,17 @@ public class Marathon {
     @NotNull
     private String title;
 
-    @OneToMany(mappedBy = "marathon", cascade = CascadeType.ALL)
-    private List<Sprint> sprint;
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "marathon", cascade = CascadeType.REMOVE)
+    private Set<Sprint> sprints = new LinkedHashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "marathon_user",
-            joinColumns = @JoinColumn(name = "marathon_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    private List<User> user;
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @JoinTable(name = "marathon_user", joinColumns = @JoinColumn(name = "marathon_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> users = new LinkedHashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<User> trainees = new LinkedHashSet<>();
+
 }

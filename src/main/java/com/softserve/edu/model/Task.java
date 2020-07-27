@@ -1,8 +1,9 @@
 package com.softserve.edu.model;
 
 import lombok.*;
-
+import org.hibernate.annotations.*;
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -11,26 +12,28 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="task")
+@Entity
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "DATE")
+    @CreationTimestamp
     private LocalDate created;
 
-    @Column(columnDefinition = "DATE")
+    @UpdateTimestamp
     private LocalDate updated;
 
     @NotNull
     private String title;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "sprint_id", referencedColumnName = "id")
+    @ToString.Exclude
+    @NotNull
+    @ManyToOne(optional=false)
+    @JoinColumn(name="sprint_id")
     private Sprint sprint;
 
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "task")
     private List<Progress> progress;
 }

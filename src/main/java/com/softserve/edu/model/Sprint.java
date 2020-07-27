@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="sprint")
+@Entity
 public class Sprint {
 
     @Id
@@ -25,10 +25,11 @@ public class Sprint {
     @NotNull
     private String title;
 
-    @OneToMany(mappedBy = "sprint", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sprint")
     private List<Task> tasks;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "marathon_id", referencedColumnName = "id")
+    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name="marathon_id", nullable=false)
     private Marathon marathon;
 }

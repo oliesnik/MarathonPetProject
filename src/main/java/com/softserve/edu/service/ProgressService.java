@@ -15,7 +15,7 @@ public interface ProgressService {
 
     Progress addOrUpdateProgress(Progress p);
 
-    //boolean setStatus(TaskStatus status, Progress p);
+    boolean setStatus(Progress.TaskStatus status, Progress p);
 
     List<Progress> allProgressByUserIdAndMarathonId(Long userId, Long marathonId);
 

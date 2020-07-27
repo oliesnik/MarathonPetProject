@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +30,7 @@ public class SprintServiceImpl implements SprintService {
 
     @Override
     public List<Sprint> getSprintsByMarathonId(Long id) {
-        List<Sprint> sprints = sprintRepository.findByMarathon(id);
+        List<Sprint> sprints = sprintRepository.getAllSprintsByMarathonId(id);
         if (!sprints.isEmpty()) {
             return sprints;
         }
@@ -37,13 +38,16 @@ public class SprintServiceImpl implements SprintService {
     }
 
     @Override
-    public boolean addSprintToMarathon(Sprint sprint, Marathon marathon) {
-        if (sprint.getId() != null) {
-            sprintRepository.getOne(sprint.getId());
-            return true;
+    public boolean addSprintToMarathon(Sprint sprint, @NotNull Marathon marathon) {
+        if (sprint.getId() == null) {
+            Marathon marathonEntity = marathonRepository.getOne(marathon.getId());
+            if (!sprintRepository.findFirstByTitleAndMarathon(sprint.getTitle(), marathonEntity).isPresent()) {
+                sprint.setMarathon(marathonEntity);
+                sprintRepository.save(sprint);
+                marathonEntity.getSprints().add(sprint);
+                return marathonRepository.save(marathonEntity) != null;
+            }
         }
-        sprint = sprintRepository.save(sprint);
-        sprint.setMarathon(marathon);
         return false;
     }
 
@@ -56,7 +60,6 @@ public class SprintServiceImpl implements SprintService {
                 newSprint.setTitle(sprint.getTitle());
                 newSprint.setStart(sprint.getStart());
                 newSprint.setFinish(sprint.getFinish());
-                newSprint = sprintRepository.save(newSprint);
                 return true;
             }
         }

@@ -32,10 +32,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         List<User> users = userRepository.findAll();
-        if (!users.isEmpty()) {
-            return users;
-        }
-        return new ArrayList<>();
+        return users.isEmpty() ? new ArrayList<>() : users;
     }
 
     @Override
@@ -81,7 +78,7 @@ public class UserServiceImpl implements UserService {
     public boolean addUserToMarathon(User user, Marathon marathon) {
         User userEntity = userRepository.getOne(user.getId());
         Marathon marathonEntity = marathonRepository.getOne(marathon.getId());
-        marathonEntity.getUser().add(userEntity);
+        marathonEntity.getUsers().add(userEntity);
         return true;
     }
 

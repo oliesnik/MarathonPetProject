@@ -1,20 +1,18 @@
 package com.softserve.edu.model;
 
 import lombok.*;
-
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="progress")
+@Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"task_id", "trainee_id"})})
 public class Progress {
 
     public enum TaskStatus {
-        PASS, FAIL, PENDING
+        NEW, PASS, FAIL, PENDING
     }
 
     @Id
@@ -27,16 +25,15 @@ public class Progress {
     @Column(columnDefinition = "DATE")
     private LocalDate updated;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
-    private TaskStatus status;
+    private TaskStatus status = TaskStatus.NEW;;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "progress_id", referencedColumnName = "id")
+    @ToString.Exclude
+    @ManyToOne
     private Task task;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "trainee_id", referencedColumnName = "id")
+    @ToString.Exclude
+    @ManyToOne
     private User trainee;
 
 }
