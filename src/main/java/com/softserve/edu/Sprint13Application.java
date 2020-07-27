@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 @SpringBootApplication
 @Slf4j
-public class Sprint13Application implements CommandLineRunner {
+public class Sprint13Application{
     private final MarathonService marathonService;
     private final ProgressService progressService;
     private final SprintService sprintService;
@@ -33,10 +33,10 @@ public class Sprint13Application implements CommandLineRunner {
         SpringApplication.run(Sprint13Application.class, args);
     }
 
-    @Override
-    public void run(String[] args) throws Exception {
-        log.info("Running Spring Boot Application");
-
+//    @Override
+//    public void run(String[] args) throws Exception {
+//        log.info("Running Spring Boot Application");
+//
 //        try {
 //            for (int i = 0; i < 10; i++) {
 //                User user = new User();
@@ -88,5 +88,3 @@ public class Sprint13Application implements CommandLineRunner {
 
 
     }
-
-}

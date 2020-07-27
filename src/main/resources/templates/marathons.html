@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Marathons</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<div th:insert="blocks/header :: header"></div>
+<div class="container mt-5">
+    <form><a th:href="'/marathon/add'" class="btn btn-primary md-2 mr-2">Create marathon</a></form>
+    <div th:each="el : ${marathons}" class="alert alert-info mt-2">
+        <h1 th:text="${el.id}"/>
+        <p th:text="${el.title}"/>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <form><a th:href="'/marathon/edit'+${el.id}" class="btn btn-primary md-2 mr-2">Edit</a></form>
+            <form th:action="'/marathon/delete/'+${el.id}" method="post">
+                <button class="btn btn-secondary" type="submit">Close</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:insert="blocks/footer :: footer"></div>
+</body>
+</html>

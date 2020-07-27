@@ -33,4 +33,7 @@ public class Marathon {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<User> trainees = new LinkedHashSet<>();
 
+    public Marathon(String title) {
+        this.title=title;
+    }
 }
