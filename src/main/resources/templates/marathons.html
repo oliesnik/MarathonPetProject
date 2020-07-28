@@ -13,7 +13,7 @@
         <h1 th:text="${el.id}"/>
         <p th:text="${el.title}"/>
         <div class="btn-group" role="group" aria-label="Basic example">
-            <form><a th:href="'/marathon/edit'+${el.id}" class="btn btn-primary md-2 mr-2">Edit</a></form>
+            <form><a th:href="'/marathon/edit/'+${el.id}" class="btn btn-primary md-2 mr-2">Edit</a></form>
             <form th:action="'/marathon/delete/'+${el.id}" method="get">
                 <button class="btn btn-secondary" type="submit">Close</button>
             </form>

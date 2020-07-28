@@ -16,8 +16,21 @@
         <input type="password" name="password" placeholder="Enter student's password" class="form-control"><br>
         <button type="submit" class="btn btn-success">Add</button>
     </form>
-
 </div>
-<div th:insert="blocks/footer :: footer"></div>
+
+<div class="container mt-5 mb-5">
+    <h1>Edit student</h1>
+    <form  method="post">
+        <div th:each="el:${student}">
+            <input type="text" th:value="${el.firstName}" name="firstName" placeholder="Enter title marathon"
+                   class="form-control"><br>
+            <input type="text" th:value="${el.lastName}" name="lastName" placeholder="Enter student's Last name" class="form-control"><br>
+            <input type="password" th:value="${el.password}" name="password" placeholder="Enter student's password" class="form-control"><br>
+            <button type="submit" class="btn btn-success">Edit</button>
+        </div>
+    </form>
+</div>
+
+    <div th:insert="blocks/footer :: footer"></div>
 </body>
 </html>

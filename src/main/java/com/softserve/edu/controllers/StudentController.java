@@ -33,14 +33,12 @@ public class StudentController {
 
     @GetMapping("/student/add")
     public String addStudent(Model model) {
-       // model.addAttribute("marathonId", marathonId);
         return "student";
     }
 
     @PostMapping("/student/add")
     public String addStudent(@RequestParam String firstName, @RequestParam String lastName,
                              @RequestParam String email, @RequestParam String password, Model model) {
-    //    Marathon marathon = marathonService.getMarathonById(marathonId);
         User student = new User();
         student.setRole(User.Role.TRAINEE);
         student.setFirstName(firstName);
@@ -50,5 +48,26 @@ public class StudentController {
         userService.createOrUpdateUser(student);
         return "redirect:/students";
     }
-    
+
+    @GetMapping("/student/edit/{id}")
+    public String editStudent(@PathVariable(value = "id") Long id, Model model) {
+        if (userService.getUserById(id) == null) {
+            return "redirect:/students";
+        }
+        User student = userService.getUserById(id);
+        model.addAttribute("student", student);
+        return "student";
+    }
+
+    @PostMapping("/student/edit/{id}")
+    public String updateStudent(@PathVariable(value = "id") Long id, @RequestParam String firstName, @RequestParam String lastName,
+                                @RequestParam String password, Model model) {
+        User student = userService.getUserById(id);
+        student.setFirstName(firstName);
+        student.setLastName(lastName);
+        student.setPassword(password);
+        userService.createOrUpdateUser(student);
+        return "redirect:/students";
+    }
+
 }
