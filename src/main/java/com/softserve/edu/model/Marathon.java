@@ -36,5 +36,4 @@ public class Marathon {
     public Marathon(String title) {
         this.title=title;
     }
-
 }
