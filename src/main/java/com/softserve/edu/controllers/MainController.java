@@ -1,4 +1,4 @@
-package com.softserve.edu.controller;
+package com.softserve.edu.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

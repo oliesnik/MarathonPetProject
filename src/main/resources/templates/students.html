@@ -1,23 +1,23 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Marathons</title>
+    <title>Students</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 </head>
 <body>
 <div th:insert="blocks/header :: header"></div>
 <div class="container mt-5">
-    <form><a th:href="'/marathon/add'" class="btn btn-primary md-2 mr-2">Create marathon</a></form>
-    <div th:each="el : ${marathons}" class="alert alert-info mt-2">
+    <form><a th:href="'/student/add'" class="btn btn-primary md-2 mr-2">Create marathon</a></form>
+    <div th:each="el : ${students}" class="alert alert-info mt-2">
         <h1 th:text="${el.id}"/>
-        <p th:text="${el.title}"/>
+        <p th:text="${el.getFirstName()}"/>
+        <p th:text="${el.getLastName()}"/>
         <div class="btn-group" role="group" aria-label="Basic example">
             <form><a th:href="'/marathon/edit'+${el.id}" class="btn btn-primary md-2 mr-2">Edit</a></form>
             <form th:action="'/marathon/delete/'+${el.id}" method="get">
-                <button class="btn btn-secondary" type="submit">Close</button>
+                <button class="btn btn-secondary" type="submit">Delete Student</button>
             </form>
-            <form><a th:href="@{'/student/add' }" class="btn btn-primary md-2 mr-2">Add Student to Marathon</a></form>
         </div>
     </div>
 </div>
