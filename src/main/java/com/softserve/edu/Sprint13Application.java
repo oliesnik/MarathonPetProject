@@ -13,21 +13,21 @@ import java.time.LocalDate;
 @SpringBootApplication
 @Slf4j
 public class Sprint13Application{
-//    private final MarathonService marathonService;
-//    private final ProgressService progressService;
-//    private final SprintService sprintService;
-//    private final TaskService taskService;
-//    private final UserService userService;
-//
-//    @Autowired
-//    public Sprint13Application(MarathonService marathonService, ProgressService progressService,
-//                               SprintService sprintService, TaskService taskService, UserService userService) {
-//        this.marathonService = marathonService;
-//        this.progressService = progressService;
-//        this.sprintService = sprintService;
-//        this.taskService = taskService;
-//        this.userService = userService;
-//    }
+    private final MarathonService marathonService;
+    private final ProgressService progressService;
+    private final SprintService sprintService;
+    private final TaskService taskService;
+    private final UserService userService;
+
+    @Autowired
+    public Sprint13Application(MarathonService marathonService, ProgressService progressService,
+                               SprintService sprintService, TaskService taskService, UserService userService) {
+        this.marathonService = marathonService;
+        this.progressService = progressService;
+        this.sprintService = sprintService;
+        this.taskService = taskService;
+        this.userService = userService;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(Sprint13Application.class, args);
@@ -36,7 +36,7 @@ public class Sprint13Application{
 //    @Override
 //    public void run(String[] args) throws Exception {
 //        log.info("Running Spring Boot Application");
-
+//
 //        try {
 //            for (int i = 0; i < 10; i++) {
 //                User user = new User();
@@ -77,7 +77,7 @@ public class Sprint13Application{
 //            progress.setStarted(LocalDate.now());
 //            progress.setStatus(Progress.TaskStatus.PASS);
 //            progressService.addOrUpdateProgress(progress);
-//
+
 //        Sprint sprint = sprintService.getSprintById(2L);
 //        for (int i = 0; i < 5; i++) {
 //            Task task = new Task();
@@ -86,7 +86,5 @@ public class Sprint13Application{
 //            taskService.addTaskToSprint(task, sprint);
 //        }
 
-
-//    }
 
 }
