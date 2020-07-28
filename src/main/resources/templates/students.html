@@ -8,7 +8,7 @@
 <body>
 <div th:insert="blocks/header :: header"></div>
 <div class="container mt-5">
-    <form><a th:href="'/student/add'" class="btn btn-primary md-2 mr-2">Create marathon</a></form>
+    <form><a th:href="'/student/add'" class="btn btn-primary md-2 mr-2">Create student</a></form>
     <div th:each="el : ${students}" class="alert alert-info mt-2">
         <h1 th:text="${el.id}"/>
         <p th:text="${el.getFirstName()}"/>

@@ -12,6 +12,7 @@
     <div th:each="el : ${marathons}" class="alert alert-info mt-2">
         <h1 th:text="${el.id}"/>
         <p th:text="${el.title}"/>
+
         <div class="btn-group" role="group" aria-label="Basic example">
             <form><a th:href="'/marathon/edit/'+${el.id}" class="btn btn-primary md-2 mr-2">Edit</a></form>
             <form th:action="'/marathon/delete/'+${el.id}" method="get">
