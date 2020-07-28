@@ -25,7 +25,7 @@ public class StudentController {
     private MarathonService marathonService;
 
     @GetMapping("/students")
-    public String getAllMarathons(Model model) {
+    public String getAllStudens(Model model) {
         List<User> students = userService.getAllByRole("Trainee");
         model.addAttribute("students", students);
         return "students";
