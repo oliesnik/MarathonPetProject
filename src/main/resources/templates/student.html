@@ -28,7 +28,7 @@
 
 <div class="container mt-5 mb-5">
     <h1>Edit student</h1>
-    <form  action="/student/edit/{id}" method="post">
+    <form method="post">
         <div th:each="el:${student}">
             <label>
                 <input type="text" th:value="${student.getFirstName()}" name="firstName" placeholder="Enter title marathon"
