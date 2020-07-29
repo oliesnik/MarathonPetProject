@@ -10,22 +10,36 @@
 <div class="container mt-5 mb-5">
     <h1>Add student</h1>
     <form action="/student/add" method="post">
-        <input type="text" name="firstName" placeholder="Enter student's First name" class="form-control"><br>
-        <input type="text" name="lastName" placeholder="Enter student's Last name" class="form-control"><br>
-        <input type="email" name="email" placeholder="Enter student's email" class="form-control"><br>
-        <input type="password" name="password" placeholder="Enter student's password" class="form-control"><br>
+        <label>
+            <input type="text" name="firstName" placeholder="Enter student's First name" class="form-control">
+        </label><br>
+        <label>
+            <input type="text" name="lastName" placeholder="Enter student's Last name" class="form-control">
+        </label><br>
+        <label>
+            <input type="email" name="email" placeholder="Enter student's email" class="form-control">
+        </label><br>
+        <label>
+            <input type="password" name="password" placeholder="Enter student's password" class="form-control">
+        </label><br>
         <button type="submit" class="btn btn-success">Add</button>
     </form>
 </div>
 
 <div class="container mt-5 mb-5">
     <h1>Edit student</h1>
-    <form  method="post">
+    <form  action="/student/edit/{id}" method="post">
         <div th:each="el:${student}">
-            <input type="text" th:value="${el.firstName}" name="firstName" placeholder="Enter title marathon"
-                   class="form-control"><br>
-            <input type="text" th:value="${el.lastName}" name="lastName" placeholder="Enter student's Last name" class="form-control"><br>
-            <input type="password" th:value="${el.password}" name="password" placeholder="Enter student's password" class="form-control"><br>
+            <label>
+                <input type="text" th:value="${student.getFirstName()}" name="firstName" placeholder="Enter title marathon"
+                       class="form-control">
+            </label><br>
+            <label>
+                <input type="text" th:value="${student.getLastName()}" name="lastName" placeholder="Enter student's Last name" class="form-control">
+            </label><br>
+            <label>
+                <input type="text" th:value="${student.getPassword()}" name="password" placeholder="Enter student's password" class="form-control">
+            </label><br>
             <button type="submit" class="btn btn-success">Edit</button>
         </div>
     </form>

@@ -18,4 +18,6 @@ public interface UserService {
 
     boolean addUserToMarathon(User user, Marathon marathon);
 
+//    List<User> getUsersByMarathonId(Long id);
+
 }

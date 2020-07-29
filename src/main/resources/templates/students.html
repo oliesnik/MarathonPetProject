@@ -10,10 +10,10 @@
 <div class="container mt-5">
     <form><a th:href="'/student/add'" class="btn btn-primary md-2 mr-2">Create student</a></form>
     <div th:each="el : ${students}" class="alert alert-info mt-2">
-        <h1 th:text="${el.id}"/>
-        <p th:text="${el.getFirstName()}"/>
-        <p th:text="${el.getLastName()}"/>
-        <p th:text="${el.getEmail()}"/>
+        <h1 th:text="${el.id}"></h1>
+        <form><a th:text="${el.getFirstName()}" th:href="'/student/edit/'+${el.id}"></a></form>
+        <p th:text="${el.getLastName()}"></p>
+        <p th:text="${el.getEmail()}"></p>
         <div class="btn-group" role="group" aria-label="Basic example">
             <form><a th:href="'/student/edit/'+${el.id}" class="btn btn-primary md-2 mr-2">Edit</a></form>
             <form th:action="'/student/delete/'+${el.id}" method="get">

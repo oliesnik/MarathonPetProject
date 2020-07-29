@@ -1,6 +1,7 @@
 package com.softserve.edu.service.impl;
 
 import com.softserve.edu.model.Marathon;
+import com.softserve.edu.model.Sprint;
 import com.softserve.edu.model.User;
 import com.softserve.edu.repository.MarathonRepository;
 import com.softserve.edu.repository.UserRepository;
@@ -81,5 +82,14 @@ public class UserServiceImpl implements UserService {
         marathonEntity.getUsers().add(userEntity);
         return true;
     }
+
+//    @Override
+//    public List<User> getUsersByMarathonId(Long id) {
+//        List<User> users = userRepository.getAllUsersByMarathonId(id);
+//        if (!users.isEmpty()) {
+//            return users;
+//        }
+//        return new ArrayList<>();
+//    }
 
 }

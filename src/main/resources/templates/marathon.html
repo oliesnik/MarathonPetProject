@@ -18,8 +18,8 @@
 <div class="container mt-5 mb-5">
     <h1>Edit marathon</h1>
     <form method="post">
-        <div th:each="el:${marathon}">
-            <input type="text" th:value="${el.title}" name="title" placeholder="Enter title marathon"
+        <div th:each="el : ${marathon}">
+            <input type="text" th:value="${marathon.getTitle()}" name="title" placeholder="Enter title marathon"
                    class="form-control"><br>
             <button type="submit" class="btn btn-success">Update</button>
         </div>

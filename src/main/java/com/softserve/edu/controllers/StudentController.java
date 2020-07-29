@@ -25,11 +25,22 @@ public class StudentController {
     private MarathonService marathonService;
 
     @GetMapping("/students")
-    public String getAllStudens(Model model) {
+    public String getAllStudents(Model model) {
         List<User> students = userService.getAllByRole("Trainee");
         model.addAttribute("students", students);
         return "students";
     }
+
+//    @GetMapping("/students/{marathon_id}")
+//    public String getAllStudetns(Model model, @PathVariable Long marathon_id) {
+//        List<User> students = userService.getAllByRole("Trainee");
+//        List<User> marathonStudents = userService.getUsersByMarathonId(marathon_id);
+//        marathonStudents.retainAll(students);
+//        model.addAttribute("marathonStudents", marathonStudents);
+//        return "marathonStudents";
+//    }
+
+
 
     @GetMapping("/student/add")
     public String addStudent(Model model) {
